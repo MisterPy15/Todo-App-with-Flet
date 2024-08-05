@@ -1,4 +1,5 @@
 from flet import *
+from custom_checkbox import CustomCheckBox
 
 
 
@@ -11,6 +12,7 @@ def main (page: Page):
     FG = '#3450a1'
     PINK = '#eb06ff'
     ORANGE = '#ffa500'
+    page.adaptive = True
         
     
     
@@ -25,7 +27,13 @@ def main (page: Page):
     )
     
     for i in range(10):
-        taches.controls.append(Container(height=50, width=400, bgcolor=BG, border_radius=15))
+        taches.controls.append(Container(height=50, width=400, bgcolor=BG,
+                                         border_radius=25,padding=padding.only(left=20, top=15), 
+                                         content=CustomCheckBox(
+                                             color=ORANGE,
+                                             label='Créé un cotenu intéressant!'
+                                         )))
+        
     
     
     categories_cards = Row(scroll='auto')
@@ -49,7 +57,7 @@ def main (page: Page):
     first_page_contents = Container(
         content = Column( controls = [
                                     Row(alignment='spaceBetween',
-                                                controls=[Container(on_click=lambda _: page.go('') ,content=Icon(icons.MENU)),
+                                                controls=[Container(content=Icon(icons.MENU)),
                                             Row(controls=[Icon(icons.SEARCH),
                                                           Icon(icons.NOTIFICATIONS_OUTLINED)]),]
                                             ),
@@ -60,7 +68,7 @@ def main (page: Page):
                   ),
         Container(height=20),
         Text("Tâches d'aujourd'huis"),
-        Stack(controls=[taches, FloatingActionButton(bottom=35,right=20,icon=icons.ADD, 
+        Stack(controls=[taches, FloatingActionButton(bottom=35,right=20,bgcolor=ORANGE, icon=icons.ADD, 
                                                      on_click=lambda _: page.go('/créé tâche')
                                                     )
                         ]
@@ -129,4 +137,5 @@ def main (page: Page):
 
     page.on_route_change = route_change
     page.go(page.route)
+    
 app(target=main)
