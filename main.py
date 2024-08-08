@@ -13,6 +13,7 @@ def main (page: Page):
     ORANGE = '#ffa500'
     page.adaptive = True
     
+    hautPage = Container(bgcolor='#000', height=30, width=400)
     
     
         
@@ -61,6 +62,8 @@ def main (page: Page):
     
     
     
+    
+    
     def shrink(e):
         page_2.controls[0].width=120
         page_2.controls[0].scale=transform.Scale(0.8, alignment=alignment.center_right)
@@ -69,7 +72,7 @@ def main (page: Page):
         page_2.update()
     
     
-  
+    
     
     
     def restore(e):
@@ -77,7 +80,6 @@ def main (page: Page):
         page_2.controls[0].border_radius = 35
         page_2.controls[0].scale=transform.Scale(1, alignment=alignment.center_right)
         page_2.update()
-    
     
     
     
@@ -190,6 +192,7 @@ def main (page: Page):
     page_2 = Row(alignment='end',
         controls=[
             Container(
+                    Row(height=30, width=400, ),
                 width=largeur, height=hauteur, 
                 bgcolor=FG, border_radius=35, animate=animation.Animation(600, AnimationCurve.DECELERATE),
                                               animate_scale = animation.Animation(400, curve='decelerate'),
@@ -247,4 +250,4 @@ def main (page: Page):
     page.on_route_change = route_change
     page.go(page.route)
     
-app(target=main)
+app(target=main, assets_dir='assets')
